@@ -94,6 +94,11 @@ class Register extends StatelessWidget {
                         )),
                     ElevatedButton(
                         onPressed: () {}, child: const Text('Aceptar')),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Back')),
                   ]),
                 ),
               );

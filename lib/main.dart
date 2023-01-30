@@ -1,6 +1,4 @@
-import 'package:actividad1/pages/bt.dart';
-import 'package:actividad1/pages/preview1.dart';
-import 'package:actividad1/pages/view1.dart';
+import 'package:actividad1/pages/login.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.yellow,
       ),
-      home: const View1(),
+      home: const Login(),
     );
   }
 }
