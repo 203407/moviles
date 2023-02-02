@@ -11,7 +11,7 @@ class OnBoarding extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<OnBoarding> {
-  late PageController _pagecontroller;
+  late PageController controlito;
   int currentPage = 0;
   List<Map<dynamic, dynamic>> boardingData = [
     {
@@ -45,13 +45,13 @@ class _MyWidgetState extends State<OnBoarding> {
 
   @override
   void initState() {
-    _pagecontroller = PageController(initialPage: 0);
+    controlito = PageController(initialPage: 0);
     super.initState();
   }
 
   @override
   void dispose() {
-    _pagecontroller.dispose();
+    controlito.dispose();
     super.dispose();
   }
 
@@ -63,7 +63,7 @@ class _MyWidgetState extends State<OnBoarding> {
           Expanded(
             flex: 3,
             child: PageView.builder(
-              controller: _pagecontroller,
+              controller: controlito,
               itemBuilder: (context, index) => ContentBoarding(
                 image: boardingData[index]['Image'],
                 title: boardingData[index]['Title'],
@@ -100,13 +100,13 @@ class _MyWidgetState extends State<OnBoarding> {
                   width: 300,
                   child: OutlinedButton(
                     onPressed: () {
-                      if (_pagecontroller.page == 4) {
+                      if (controlito.page == 4) {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const Login()));
                       }
-                      _pagecontroller.nextPage(
+                      controlito.nextPage(
                           curve: Curves.ease,
                           duration: const Duration(milliseconds: 300));
                     },
