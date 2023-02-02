@@ -50,8 +50,6 @@ class Register extends StatelessWidget {
                         child: TextField(
                           decoration: InputDecoration(
                             hintText: 'Username',
-                            //border: OutlineInputBorder(
-                            //borderSide: BorderSide(color: Colors.green))
                           ),
                         )),
                     const Padding(
@@ -92,13 +90,36 @@ class Register extends StatelessWidget {
                               InputDecoration(hintText: 'Confirm password'),
                           obscureText: true,
                         )),
-                    ElevatedButton(
-                        onPressed: () {}, child: const Text('Aceptar')),
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Back')),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 15),
+                      child: Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 45.0),
+                            child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 112, 171, 113)),
+                                child: const Text('Aceptar',
+                                    style: TextStyle(color: Colors.white))),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: ElevatedButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 112, 171, 113)),
+                                child: const Text('Regresar',
+                                    style: TextStyle(color: Colors.white))),
+                          )
+                        ],
+                      ),
+                    ),
                   ]),
                 ),
               );

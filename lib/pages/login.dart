@@ -34,8 +34,6 @@ class Login extends StatelessWidget {
                           padding: EdgeInsetsDirectional.only(bottom: 20),
                           child: TextField(
                             decoration: InputDecoration(hintText: 'email'),
-                            // onChanged: (value) =>
-                            //     print('First text field: $value'))),
                           )),
                       const Padding(
                           padding: EdgeInsetsDirectional.only(bottom: 30),
@@ -50,6 +48,8 @@ class Login extends StatelessWidget {
                           width: 100,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  const Color.fromARGB(255, 112, 171, 113),
                               shape: const BeveledRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                       bottomRight: Radius.circular(10),
@@ -63,13 +63,21 @@ class Login extends StatelessWidget {
                             },
                             child: const Text(
                               'Registrar',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: TextStyle(color: Colors.white),
                             ),
                           ),
                         ),
                       ),
                       ElevatedButton(
-                          onPressed: () {}, child: const Text('Aceptar')),
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromARGB(255, 112, 171, 113)),
+                        child: const Text(
+                          'Aceptar',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ],
                   ),
                 ),
