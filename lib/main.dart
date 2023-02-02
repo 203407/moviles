@@ -1,4 +1,4 @@
-import 'package:actividad1/pages/login.dart';
+import 'package:actividad1/screens/onboarding/components/splash_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.yellow,
       ),
-      home: const Login(),
+      home: const SplashView(),
     );
   }
 }

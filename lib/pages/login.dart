@@ -30,11 +30,6 @@ class Login extends StatelessWidget {
                                 backgroundImage:
                                     AssetImage('assets/images/ne.jpg'))),
                       ),
-                      // child: Image.asset(
-                      //   'assets/images/ne.jpg',
-                      //   colorBlendMode: BlendMode.darken,
-                      //   fit: BoxFit.fitWidth,
-                      // )),
                       const Padding(
                           padding: EdgeInsetsDirectional.only(bottom: 20),
                           child: TextField(
