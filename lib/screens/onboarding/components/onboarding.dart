@@ -1,4 +1,5 @@
 import 'package:actividad1/pages/login.dart';
+import 'package:actividad1/pages/principal.dart';
 import 'package:actividad1/screens/onboarding/components/content_boarding.dart';
 import 'package:actividad1/screens/onboarding/components/content_page.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _MyWidgetState extends State<OnBoarding> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const Login()));
+                                builder: (context) => const Principal()));
                       }
                       controlito.nextPage(
                           curve: Curves.ease,
