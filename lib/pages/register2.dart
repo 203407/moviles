@@ -35,160 +35,132 @@ class Register2 extends StatelessWidget {
           child: LayoutBuilder(builder:
               (BuildContext context, BoxConstraints viewportContrains) {
             return SingleChildScrollView(
-                child: Column(
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 40, left: 1, top: 15),
-                  child: Text(
-                    'Cree una cuenta para emprezar a usar la app',
-                    style: TextStyle(
-                      fontSize: 17,
-                      color: Color.fromARGB(192, 48, 46, 46),
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 10, left: 10),
-                        child: Text(
-                          'Nombre',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 3, 3, 3),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Nombre Completo',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 10, left: 10),
-                        child: Text(
-                          'Correo electrónico',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 3, 3, 3),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Dirección de correo',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      const Padding(
-                        padding: EdgeInsets.only(bottom: 10, left: 10),
-                        child: Text(
-                          'Contraseña',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 3, 3, 3),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Contraseña',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          suffixIcon: const Icon(
-                            Icons.visibility,
-                            color: Color.fromARGB(255, 186, 179, 179),
-                          ),
-                        ),
-                        obscureText: true,
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    'La contraseña debe de contener carcteres, numeros y simbolos con un minimo de 6 caracteres',
-                    style: TextStyle(
-                      fontSize: 15,
-                      color: Color.fromARGB(112, 66, 64, 64),
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Checkbox(
-                      shape: const CircleBorder(),
-                      checkColor: Colors.white,
-                      activeColor: Colors.deepPurple,
-                      tristate: true,
-                      value: false,
-                      onChanged: (val) {},
-                    ),
-                    const Text(
-                      'Al registrarme, acepto los',
+                child: Form(
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 40, left: 1, top: 15),
+                    child: Text(
+                      'Cree una cuenta para emprezar a usar la app',
                       style: TextStyle(
-                        color: Color(0xFF4E4E4E),
-                        fontSize: 13,
+                        fontSize: 17,
+                        color: Color.fromARGB(192, 48, 46, 46),
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'Terminos y condiciones',
-                        style: TextStyle(
-                          color: Color(0xFFE1416D),
-                          fontSize: 12,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10, left: 10),
+                          child: Text(
+                            'Nombre',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 3, 3, 3),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ),
+                        TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Nombre Completo',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                          onChanged: (value) => {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 25),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10, left: 10),
+                          child: Text(
+                            'Correo electrónico',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 3, 3, 3),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Dirección de correo',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 10, left: 10),
+                          child: Text(
+                            'Contraseña',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 3, 3, 3),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                        TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Contraseña',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            suffixIcon: const Icon(
+                              Icons.visibility,
+                              color: Color.fromARGB(255, 186, 179, 179),
+                            ),
+                          ),
+                          obscureText: true,
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      'La contraseña debe de contener carcteres, numeros y simbolos con un minimo de 6 caracteres',
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: Color.fromARGB(112, 66, 64, 64),
                       ),
                     ),
-                    const Text(
-                      'y',
-                      style: TextStyle(
-                        color: Color(0xFF4E4E4E),
-                        fontSize: 13,
-                      ),
-                    )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 50, bottom: 10),
-                  child: Row(
+                  ),
+                  Row(
                     children: [
+                      Checkbox(
+                        shape: const CircleBorder(),
+                        checkColor: Colors.white,
+                        activeColor: Colors.deepPurple,
+                        tristate: true,
+                        value: false,
+                        onChanged: (val) {},
+                      ),
                       const Text(
-                        'la',
+                        'Al registrarme, acepto los',
                         style: TextStyle(
                           color: Color(0xFF4E4E4E),
                           fontSize: 13,
@@ -197,73 +169,104 @@ class Register2 extends StatelessWidget {
                       TextButton(
                         onPressed: () {},
                         child: const Text(
-                          'Politica de privacidad',
+                          'Terminos y condiciones',
                           style: TextStyle(
                             color: Color(0xFFE1416D),
                             fontSize: 12,
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: SizedBox(
-                    height: 55,
-                    width: 300,
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Color.fromARGB(255, 58, 167, 89),
-                          onPrimary: const Color.fromARGB(255, 2, 2, 2),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30)),
-
-                          //border width and color
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Crear Cuenta',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color.fromARGB(255, 254, 253, 253),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
                       const Text(
-                        '¿Ya tienes cuenta?',
+                        'y',
                         style: TextStyle(
                           color: Color(0xFF4E4E4E),
-                          fontSize: 16,
+                          fontSize: 13,
                         ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const Login()),
-                          );
-                        },
-                        child: const Text(
-                          'Iniciar sesión',
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 50, bottom: 10),
+                    child: Row(
+                      children: [
+                        const Text(
+                          'la',
                           style: TextStyle(
-                            color: Color(0xFFE1416D),
+                            color: Color(0xFF4E4E4E),
+                            fontSize: 13,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Politica de privacidad',
+                            style: TextStyle(
+                              color: Color(0xFFE1416D),
+                              fontSize: 12,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 55,
+                      width: 300,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Color.fromARGB(255, 58, 167, 89),
+                            onPrimary: const Color.fromARGB(255, 2, 2, 2),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+
+                            //border width and color
+                          ),
+                          onPressed: () {},
+                          child: const Text(
+                            'Crear Cuenta',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color.fromARGB(255, 254, 253, 253),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          '¿Ya tienes cuenta?',
+                          style: TextStyle(
+                            color: Color(0xFF4E4E4E),
                             fontSize: 16,
                           ),
                         ),
-                      ),
-                    ],
+                        TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Login()),
+                            );
+                          },
+                          child: const Text(
+                            'Iniciar sesión',
+                            style: TextStyle(
+                              color: Color(0xFFE1416D),
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ));
           }),
         ),

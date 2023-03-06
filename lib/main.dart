@@ -1,3 +1,4 @@
+import 'package:actividad1/pages/principal.dart';
 import 'package:actividad1/screens/onboarding/components/splash_view.dart';
 import 'package:flutter/material.dart';
 
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
       ),
       home: const SplashView(),
+      routes: <String, WidgetBuilder>{
+        '/screen1': (BuildContext context) => const Principal(),
+      },
     );
   }
 }

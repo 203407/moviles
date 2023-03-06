@@ -9,14 +9,14 @@ class SplashView extends StatelessWidget {
     return Scaffold(
       body: Container(
         alignment: Alignment.center,
-        padding: const EdgeInsetsDirectional.only(top: 0),
+        padding: const EdgeInsetsDirectional.only(top: 10),
         child: Column(
           children: [
             const Image(
               image: AssetImage('assets/images/top.png'),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 55.0),
+              padding: const EdgeInsets.only(top: 150),
               child: MaterialButton(
                 onPressed: () {
                   Navigator.push(
@@ -31,7 +31,7 @@ class SplashView extends StatelessWidget {
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(top: 167.96),
+              padding: EdgeInsets.only(top: 231),
               child: Image(
                 image: AssetImage('assets/images/bottom.png'),
               ),

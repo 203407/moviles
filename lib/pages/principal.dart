@@ -1,7 +1,12 @@
 // ignore_for_file: deprecated_member_use
-
+import 'package:actividad1/ath/authenticator.dart';
 import 'package:actividad1/pages/register2.dart';
+import 'package:actividad1/pages/sign.dart';
+import 'package:actividad1/pages/signF.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 import 'login.dart';
 
@@ -10,6 +15,7 @@ class Principal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Firebase.initializeApp();
     return Scaffold(
         body: Center(
       child: Padding(
@@ -32,8 +38,19 @@ class Principal extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   /*googleLogin();*/
+                  User? user =
+                      await Authenticator.iniciarSesion(context: context);
+
+                  if (user != null) {
+                    // ignore: use_build_context_synchronously
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => Sign(user: user)),
+                      (Route<dynamic> route) => false,
+                    );
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -41,6 +58,7 @@ class Principal extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
+                      // Icon(Icons.add),
                       Image(
                         image: AssetImage("assets/images/google.png"),
                         height: 18.0,
@@ -61,19 +79,31 @@ class Principal extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ElevatedButton(
                 /*Facebook*/
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 22, 89, 144),
+                  primary: const Color.fromARGB(255, 22, 89, 144),
                   onPrimary: const Color.fromARGB(255, 254, 253, 253),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                 ),
-                onPressed: () {
-                  /*googleLogin();*/
+                onPressed: () async {
+                  FacebookAuth.instance.login(
+                      permissions: ["public_profile", "email"]).then((value) {
+                    FacebookAuth.instance.getUserData().then((userData) async {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SignF(
+                                nombre: userData['name'],
+                                email: userData['email'])),
+                        (Route<dynamic> route) => false,
+                      );
+                    });
+                  });
                 },
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
@@ -101,7 +131,7 @@ class Principal extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               ElevatedButton(
@@ -148,7 +178,7 @@ class Principal extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextButton(
@@ -180,7 +210,7 @@ class Principal extends StatelessWidget {
                 child: const Text('Entrar como vendedor'),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15, left: 25, right: 6),
+                padding: const EdgeInsets.only(top: 15, left: 5, right: 4),
                 child: Row(
                   children: [
                     const Padding(
