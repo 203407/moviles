@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../firebase_options.dart';
+import 'features/games/presentation/notifications/notification_api.dart';
 
 UsecaseConfig usecaseConfig = UsecaseConfig();
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initNotifications();
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -42,19 +46,5 @@ class MyApp extends StatelessWidget {
         },
       ),
     );
-    //
-    //return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'Flutter Demo',
-    //   theme: ThemeData(
-    //     // is not restarted.
-    //     primarySwatch: Colors.grey,
-    //   ),
-    //   home: const Principal(),
-    //   routes: <String, WidgetBuilder>{
-    //     '/screen1': (BuildContext context) => const Principal(),
-    //   },
-
-    // );
   }
 }

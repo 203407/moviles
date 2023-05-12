@@ -12,9 +12,9 @@ class ViewReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 35, 35, 35),
+      backgroundColor: const Color.fromARGB(255, 35, 35, 35),
       appBar: AppBar(
-        actions: <Widget>[],
+        actions: const <Widget>[],
         iconTheme: const IconThemeData(color: Colors.white),
         title: Row(
           children: const [
@@ -98,9 +98,9 @@ class ViewReview extends StatelessWidget {
                   print(rating.toInt());
                   print(titulo);
                   showNotification(
-                      title: 'Haz calificado $titulo',
+                      title: 'Haz calificado a $titulo',
                       body:
-                          'Gracias por tus $rating estrellas, sigue navegando y descubre nuevos juegos!');
+                          'Gracias por tus $rating estrellas , sigue navegando y descubre nuevos juegos!');
                 },
               ),
             ]),

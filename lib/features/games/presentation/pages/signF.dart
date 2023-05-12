@@ -21,8 +21,24 @@ class _SignFState extends State<SignF> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: const Color.fromARGB(255, 35, 35, 35),
         appBar: AppBar(
-          title: const Text("Juegos"),
+          actions: const <Widget>[],
+          iconTheme: const IconThemeData(color: Colors.white),
+          title: Row(
+            children: const [
+              CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/games.jpg')),
+              Padding(
+                padding: EdgeInsets.only(left: 18.0),
+                child: Text(
+                  "GameReview",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
+          ),
+          backgroundColor: const Color.fromARGB(208, 0, 0, 0),
         ),
         body: BlocBuilder<GamesBloc, GamesState>(
           builder: (context, state) {
