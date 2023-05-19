@@ -14,20 +14,9 @@ abstract class GamesRemoteDataSource {
 class GamesRemoteDataSourceImp implements GamesRemoteDataSource {
   @override
   Future<List<GamesModel>> getGames() async {
-    //print('DataSource');
+    List a = [];
 
-    FirebaseFirestore db = FirebaseFirestore.instance;
-
-    List games = [];
-    CollectionReference collectionReferenceGames = db.collection('games');
-
-    QuerySnapshot queryGames = await collectionReferenceGames.get();
-
-    queryGames.docs.forEach((element) {
-      games.add(element.data());
-    });
-
-    return games.map<GamesModel>((data) => GamesModel.fromJson(data)).toList();
+    return a.map<GamesModel>((data) => GamesModel.fromJson(data)).toList();
   }
 
   @override

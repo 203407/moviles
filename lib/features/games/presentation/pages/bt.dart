@@ -10,7 +10,7 @@ class Bt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: Container(
           width: 500,
           height: 100,
@@ -20,7 +20,7 @@ class Bt extends StatelessWidget {
           ),
           child: Row(children: [
             Padding(
-              padding: const EdgeInsets.only(right: 30.0, left: 20),
+              padding: const EdgeInsets.only(right: 10.0, left: 10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 245, 245),

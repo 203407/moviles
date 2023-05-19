@@ -13,7 +13,7 @@ class GamesModel extends Game {
             titulo: titulo);
 
   factory GamesModel.fromJson(Map<String, dynamic> json) {
-    print(json['Estrellas']);
+    // print(json['Estrellas']);
     return GamesModel(
         estrellas: json['Estrellas'],
         descripcion: json['Descripcion'],
