@@ -1,11 +1,21 @@
+import 'package:actividad1/features/games/presentation/blocs/games_bloc.dart';
 import 'package:actividad1/features/games/presentation/pages/viewReview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../../../main.dart';
+
 class Bt extends StatelessWidget {
-  const Bt({super.key, this.titulo, this.imagen, this.descrip, this.estrellas});
-  final String? titulo, imagen, descrip;
+  const Bt(
+      {super.key,
+      this.titulo,
+      this.imagen,
+      this.descrip,
+      this.estrellas,
+      this.id});
+  final String? titulo, imagen, descrip, id;
   final double? estrellas;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +59,8 @@ class Bt extends StatelessWidget {
                                   titulo: titulo,
                                   imagen: imagen,
                                   descrip: descrip,
-                                  estrellas: estrellas)));
+                                  estrellas: estrellas,
+                                  id: id)));
                     },
                     child: Column(
                       children: [
@@ -83,7 +94,11 @@ class Bt extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 20),
               child: IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    String resultado =
+                        await usecaseConfig.deleteGameUsecase!.execute(id);
+                    context.read<GamesBloc>().add(GetGames());
+                  },
                   icon: const Icon(
                     Icons.delete_rounded,
                     size: 30,

@@ -5,12 +5,14 @@ class GamesModel extends Game {
       {required int estrellas,
       required String descripcion,
       required String imagen,
-      required String titulo})
+      required String titulo,
+      required String id})
       : super(
             estrellas: estrellas,
             descripcion: descripcion,
             imagen: imagen,
-            titulo: titulo);
+            titulo: titulo,
+            id: id);
 
   factory GamesModel.fromJson(Map<String, dynamic> json) {
     // print(json['Estrellas']);
@@ -18,7 +20,8 @@ class GamesModel extends Game {
         estrellas: json['Estrellas'],
         descripcion: json['Descripcion'],
         imagen: json['Imagen'],
-        titulo: json['Titulo']);
+        titulo: json['Titulo'],
+        id: json['id']);
   }
 
   factory GamesModel.fromEntity(Game game) {
@@ -26,6 +29,7 @@ class GamesModel extends Game {
         estrellas: game.estrellas,
         descripcion: game.descripcion,
         imagen: game.imagen,
-        titulo: game.titulo);
+        titulo: game.titulo,
+        id: game.id);
   }
 }

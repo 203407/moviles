@@ -18,12 +18,13 @@ class GameRepositoryImpl implements GamesRepository {
   }
 
   @override
-  Future<String> deleteGames() async {
-    return await gamesRemoteDataSource.deleteGames();
+  Future<String> deleteGames(id) async {
+    return await gamesRemoteDataSource.deleteGames(id);
   }
 
   @override
-  Future<String> updateGames() async {
-    return await gamesRemoteDataSource.updateGames();
+  Future<String> updateGames(id, stars, descri, titulo, img) async {
+    return await gamesRemoteDataSource.updateGames(
+        id, stars, descri, titulo, img);
   }
 }

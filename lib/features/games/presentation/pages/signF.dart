@@ -26,7 +26,6 @@ class _SignFState extends State<SignF> {
 
   @override
   Widget build(BuildContext context) {
-    UsecaseConfig? usecaseConfig;
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 35, 35, 35),
         appBar: AppBar(
@@ -54,8 +53,9 @@ class _SignFState extends State<SignF> {
             Icons.add,
             color: Colors.black,
           ),
-          onPressed: () {
-            openDialog();
+          onPressed: () async {
+            await openDialog();
+            setState(() {});
           },
         ),
         body: BlocBuilder<GamesBloc, GamesState>(
@@ -69,11 +69,11 @@ class _SignFState extends State<SignF> {
                 child: Column(
                     children: state.games.map((games) {
                   return Bt(
-                    titulo: games.titulo,
-                    imagen: games.imagen,
-                    descrip: games.descripcion,
-                    estrellas: games.estrellas.toDouble(),
-                  );
+                      titulo: games.titulo,
+                      imagen: games.imagen,
+                      descrip: games.descripcion,
+                      estrellas: games.estrellas.toDouble(),
+                      id: games.id);
                 }).toList()),
               );
             } else if (state is Error) {
@@ -140,9 +140,14 @@ class _SignFState extends State<SignF> {
 
                 String resultado = await usecaseConfig.createGameUsecase!
                     .execute(name, descrip, image);
-                print(resultado);
 
-                Navigator.of(context).pop();
+                // ignore: use_build_context_synchronously
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  // MaterialPageRoute(builder: (context) => Sign(user: user)),
+                  MaterialPageRoute(builder: (context) => const SignF()),
+                  (Route<dynamic> route) => false,
+                );
               },
               child: const Text('Agregar'),
             ),

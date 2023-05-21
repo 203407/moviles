@@ -7,8 +7,8 @@ abstract class GamesRemoteDataSource {
   // https://jsonplaceholder.typicode.com/posts
   Future<List<GamesModel>> getGames(d);
   Future<String> createGames(nombre, descrip, img);
-  Future<String> updateGames();
-  Future<String> deleteGames();
+  Future<String> updateGames(id, stars, descri, titulo, img);
+  Future<String> deleteGames(id);
 }
 
 class GamesRemoteDataSourceImp implements GamesRemoteDataSource {
@@ -16,18 +16,27 @@ class GamesRemoteDataSourceImp implements GamesRemoteDataSource {
 
   @override
   Future<List<GamesModel>> getGames(d) async {
-    //print('DataSource');
-
-    print("aqui esta el pase de parametros" + d.toString());
-
     List games = [];
     CollectionReference collectionReferenceGames = db.collection('games');
 
     QuerySnapshot queryGames = await collectionReferenceGames.get();
 
-    queryGames.docs.forEach((element) {
-      games.add(element.data());
-    });
+    for (var doc in queryGames.docs) {
+      final Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+      final game = {
+        'Estrellas': data['Estrellas'],
+        'Descripcion': data['Descripcion'],
+        'Imagen': data['Imagen'],
+        'id': doc.id,
+        'Titulo': data['Titulo']
+      };
+
+      games.add(game);
+    }
+    // queryGames.docs.forEach((element) {
+    //   games.add(element.data());
+    // });
 
     return games.map<GamesModel>((data) => GamesModel.fromJson(data)).toList();
   }
@@ -49,14 +58,22 @@ class GamesRemoteDataSourceImp implements GamesRemoteDataSource {
   }
 
   @override
-  Future<String> updateGames() async {
-    String a = "";
-    return a;
+  Future<String> updateGames(id, stars, descri, titulo, img) async {
+    final data = {
+      "Titulo": titulo.toString(),
+      "Imagen": img.toString(),
+      "Descripcion": descri.toString(),
+      "Estrellas": stars
+    };
+
+    await db.collection("games").doc(id).set(data);
+
+    return "si2";
   }
 
   @override
-  Future<String> deleteGames() async {
-    String a = "";
-    return a;
+  Future<String> deleteGames(id) async {
+    await db.collection("games").doc(id).delete();
+    return "si3";
   }
 }

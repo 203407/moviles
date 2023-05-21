@@ -6,7 +6,7 @@ class UpdateGameUsecase {
 
   UpdateGameUsecase(this.gamesRepository);
 
-  Future<String> execute() async {
-    return await gamesRepository.updateGames();
+  Future<String> execute(id, stars, descri, titulo, img) async {
+    return await gamesRepository.updateGames(id, stars, descri, titulo, img);
   }
 }

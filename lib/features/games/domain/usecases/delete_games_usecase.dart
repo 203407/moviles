@@ -6,7 +6,7 @@ class DeleteGameUsecase {
 
   DeleteGameUsecase(this.gamesRepository);
 
-  Future<String> execute() async {
-    return await gamesRepository.deleteGames();
+  Future<String> execute(id) async {
+    return await gamesRepository.deleteGames(id);
   }
 }

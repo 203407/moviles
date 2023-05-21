@@ -1,12 +1,20 @@
+import 'package:actividad1/features/games/presentation/pages/signF.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../../../../main.dart';
+import '../../../../usecase_config.dart';
 import '../notifications/notification_api.dart';
 
 class ViewReview extends StatelessWidget {
   const ViewReview(
-      {super.key, this.titulo, this.imagen, this.descrip, this.estrellas});
-  final String? titulo, imagen, descrip;
+      {super.key,
+      this.titulo,
+      this.imagen,
+      this.descrip,
+      this.estrellas,
+      this.id});
+  final String? titulo, imagen, descrip, id;
   final double? estrellas;
 
   @override
@@ -14,6 +22,7 @@ class ViewReview extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 35, 35, 35),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: const <Widget>[],
         iconTheme: const IconThemeData(color: Colors.white),
         title: Row(
@@ -31,14 +40,16 @@ class ViewReview extends StatelessWidget {
         ),
         backgroundColor: const Color.fromARGB(208, 0, 0, 0),
       ),
-      body: Column(children: [
-        SizedBox(
-          child: Image.network(imagen!),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10.0),
-          child: Container(
-            height: 300,
+      body: Padding(
+        padding: const EdgeInsets.only(left: 43.0),
+        child: Column(children: [
+          SizedBox(
+            width: 300, // Ancho deseado
+            height: 250, // Alto deseado
+            child: Image.network(imagen!),
+          ),
+          Container(
+            height: 280,
             width: 300,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20.0),
@@ -46,7 +57,7 @@ class ViewReview extends StatelessWidget {
             ),
             child: Column(children: [
               const Padding(
-                padding: EdgeInsets.only(top: 30.0),
+                padding: EdgeInsets.only(top: 20.0),
                 child: Text("Nombre del juego:",
                     style: TextStyle(fontWeight: FontWeight.bold)),
               ),
@@ -93,20 +104,45 @@ class ViewReview extends StatelessWidget {
                   Icons.star,
                   color: Colors.amber,
                 ),
-                onRatingUpdate: (rating) {
-                  // ignore: avoid_print
-                  print(rating.toInt());
-                  print(titulo);
+                onRatingUpdate: (rating) async {
+                  // print(rating.toInt());
+                  // print(titulo);
+
+                  // print(id);
                   showNotification(
-                      title: 'Haz calificado a $titulo',
-                      body:
-                          'Gracias por tus $rating estrellas , sigue navegando y descubre nuevos juegos!');
+                      title: 'Haz cambiado la calificacion a $titulo',
+                      body: 'Gracias por tu opinion');
+
+                  if (usecaseConfig != null) {
+                    String sxd = await usecaseConfig.updateGameUsecase!
+                        .execute(id, rating.toInt(), descrip, titulo, imagen);
+                  }
                 },
               ),
             ]),
           ),
-        )
-      ]),
+          Padding(
+            padding: const EdgeInsets.only(left: 300.0, top: 10),
+            child: FloatingActionButton(
+              splashColor: Colors.green,
+              elevation: 10.0,
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              child: const Icon(
+                Icons.arrow_back,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  // MaterialPageRoute(builder: (context) => Sign(user: user)),
+                  MaterialPageRoute(builder: (context) => const SignF()),
+                  (Route<dynamic> route) => false,
+                );
+              },
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }
