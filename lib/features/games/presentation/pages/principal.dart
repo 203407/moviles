@@ -8,7 +8,7 @@ class Principal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color.fromARGB(255, 35, 35, 35),
+        backgroundColor: const Color.fromARGB(208, 0, 0, 0),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.only(),

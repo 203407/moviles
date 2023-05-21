@@ -25,8 +25,8 @@ class _SignFState extends State<SignF> {
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 35, 35, 35),
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(208, 0, 0, 0),
           actions: const <Widget>[],
-          iconTheme: const IconThemeData(color: Colors.white),
           title: Row(
             children: const [
               CircleAvatar(
@@ -40,7 +40,18 @@ class _SignFState extends State<SignF> {
               ),
             ],
           ),
-          backgroundColor: const Color.fromARGB(208, 0, 0, 0),
+        ),
+        floatingActionButton: FloatingActionButton(
+          splashColor: Colors.green,
+          elevation: 10.0,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+          child: const Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            openDialog();
+          },
         ),
         body: BlocBuilder<GamesBloc, GamesState>(
           builder: (context, state) {
@@ -70,5 +81,58 @@ class _SignFState extends State<SignF> {
             }
           },
         ));
+  }
+
+  Future openDialog() async {
+    TextEditingController nameController = TextEditingController();
+    TextEditingController descripController = TextEditingController();
+    TextEditingController imageController = TextEditingController();
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Agregar nuevo juego'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(labelText: 'Nombre'),
+              ),
+              TextField(
+                controller: descripController,
+                decoration: InputDecoration(labelText: 'Descripción'),
+              ),
+              TextField(
+                controller: imageController,
+                decoration: InputDecoration(labelText: 'Imagen (URL)'),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancelar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                String name = nameController.text;
+                String descrip = descripController.text;
+                String image = imageController.text;
+
+                // Realizar acción con los datos ingresados
+                // ...
+
+                Navigator.of(context).pop();
+              },
+              child: Text('Agregar'),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

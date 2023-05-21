@@ -15,31 +15,31 @@ class Bt extends StatelessWidget {
           width: 500,
           height: 100,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 225, 220, 220),
+            color: Color.fromARGB(255, 207, 205, 205),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(children: [
             Padding(
-              padding: const EdgeInsets.only(right: 10.0, left: 10),
+              padding: const EdgeInsets.only(right: 9.0, left: 9),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 255, 245, 245),
-                  minimumSize: Size(2, 2),
+                  minimumSize: Size(3, 3),
                 ),
                 onPressed: () {},
                 child: Image(
                   image: NetworkImage(imagen!),
-                  height: 70,
-                  width: 70,
+                  height: 60,
+                  width: 60,
                 ),
               ),
             ),
             Padding(
-                padding: const EdgeInsets.only(top: 20, bottom: 30),
+                padding: const EdgeInsets.only(top: 20, bottom: 20),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color.fromARGB(255, 255, 245, 245),
-                      minimumSize: const Size(200, 200),
+                      minimumSize: const Size(180, 100),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -51,33 +51,45 @@ class Bt extends StatelessWidget {
                                   descrip: descrip,
                                   estrellas: estrellas)));
                     },
-                    child: Column(children: [
-                      Padding(
-                          padding: const EdgeInsets.only(
-                              left: 30.0, right: 30, bottom: 1),
-                          child: Text(titulo!)),
-                      Column(
-                        children: [
-                          const Text("Calificacion"),
-                          RatingBar.builder(
-                            initialRating: estrellas!,
-                            minRating: 1,
-                            direction: Axis.horizontal,
-                            allowHalfRating: true,
-                            itemCount: 5,
-                            itemSize: 15,
-                            // ignore: prefer_const_constructors
-                            itemBuilder: (context, _) => Icon(
-                              Icons.star,
-                              color: Colors.amber,
+                    child: Column(
+                      children: [
+                        Padding(
+                            padding:
+                                const EdgeInsets.only(left: 0.0, bottom: 1),
+                            child: Text(titulo!)),
+                        Column(
+                          children: [
+                            const Text("Calificacion"),
+                            RatingBar.builder(
+                              initialRating: estrellas!,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemSize: 15,
+                              // ignore: prefer_const_constructors
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (rating) {
+                                print(rating);
+                              },
                             ),
-                            onRatingUpdate: (rating) {
-                              print(rating);
-                            },
-                          ),
-                        ],
-                      ),
-                    ]))),
+                          ],
+                        ),
+                      ],
+                    ))),
+            const Padding(
+              padding: EdgeInsets.only(left: 20),
+              child: IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.delete_rounded,
+                    size: 30,
+                    color: Color.fromARGB(255, 218, 31, 31),
+                  )),
+            )
           ])),
     );
   }
