@@ -6,7 +6,7 @@ class CreateGameUsecase {
 
   CreateGameUsecase(this.gamesRepository);
 
-  Future<String> execute() async {
-    return await gamesRepository.createGames();
+  Future<String> execute(nombre, descrip, img) async {
+    return await gamesRepository.createGames(nombre, descrip, img);
   }
 }

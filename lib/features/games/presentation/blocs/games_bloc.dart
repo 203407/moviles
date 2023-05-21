@@ -13,7 +13,7 @@ class GamesBloc extends Bloc<GamesEvent, GamesState> {
     on<GamesEvent>((event, emit) async {
       if (event is GetGames) {
         try {
-          List<Game> response = await getGameUsecase.execute();
+          List<Game> response = await getGameUsecase.execute(123);
           emit(Loaded(games: response));
         } catch (e) {
           emit(Error(error: e.toString()));

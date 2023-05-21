@@ -1,8 +1,12 @@
 import 'package:actividad1/features/games/presentation/blocs/games_bloc.dart';
 import 'package:actividad1/features/games/presentation/pages/bt.dart';
+import 'package:actividad1/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../usecase_config.dart';
+import '../../domain/usecases/create_games_usecase.dart';
 
 class SignF extends StatefulWidget {
   const SignF({super.key});
@@ -22,6 +26,7 @@ class _SignFState extends State<SignF> {
 
   @override
   Widget build(BuildContext context) {
+    UsecaseConfig? usecaseConfig;
     return Scaffold(
         backgroundColor: const Color.fromARGB(255, 35, 35, 35),
         appBar: AppBar(
@@ -92,43 +97,54 @@ class _SignFState extends State<SignF> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Agregar nuevo juego'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                controller: nameController,
-                decoration: InputDecoration(labelText: 'Nombre'),
+          title: const Text('Agregar nuevo juego'),
+          content: SingleChildScrollView(
+            child: SafeArea(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 50, right: 50),
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: nameController,
+                        decoration: const InputDecoration(labelText: 'Nombre'),
+                      ),
+                      TextField(
+                        controller: descripController,
+                        decoration:
+                            const InputDecoration(labelText: 'Descripción'),
+                      ),
+                      TextField(
+                        controller: imageController,
+                        decoration:
+                            const InputDecoration(labelText: 'Imagen (URL)'),
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              TextField(
-                controller: descripController,
-                decoration: InputDecoration(labelText: 'Descripción'),
-              ),
-              TextField(
-                controller: imageController,
-                decoration: InputDecoration(labelText: 'Imagen (URL)'),
-              ),
-            ],
+            ),
           ),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Cancelar'),
+              child: const Text('Cancelar'),
             ),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 String name = nameController.text;
                 String descrip = descripController.text;
                 String image = imageController.text;
 
-                // Realizar acción con los datos ingresados
-                // ...
+                String resultado = await usecaseConfig.createGameUsecase!
+                    .execute(name, descrip, image);
+                print(resultado);
 
                 Navigator.of(context).pop();
               },
-              child: Text('Agregar'),
+              child: const Text('Agregar'),
             ),
           ],
         );

@@ -8,13 +8,13 @@ class GameRepositoryImpl implements GamesRepository {
   GameRepositoryImpl({required this.gamesRemoteDataSource});
 
   @override
-  Future<List<Game>> getGames() async {
-    return await gamesRemoteDataSource.getGames();
+  Future<List<Game>> getGames(d) async {
+    return await gamesRemoteDataSource.getGames(d);
   }
 
   @override
-  Future<String> createGames() async {
-    return await gamesRemoteDataSource.createGames();
+  Future<String> createGames(nombre, descrip, img) async {
+    return await gamesRemoteDataSource.createGames(nombre, descrip, img);
   }
 
   @override

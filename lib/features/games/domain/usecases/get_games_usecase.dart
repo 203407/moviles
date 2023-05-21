@@ -6,7 +6,7 @@ class GetGameUsecase {
 
   GetGameUsecase(this.gamesRepository);
 
-  Future<List<Game>> execute() async {
-    return await gamesRepository.getGames();
+  Future<List<Game>> execute(d) async {
+    return await gamesRepository.getGames(d);
   }
 }

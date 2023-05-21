@@ -80,11 +80,11 @@ class Bt extends StatelessWidget {
                         ),
                       ],
                     ))),
-            const Padding(
+            Padding(
               padding: EdgeInsets.only(left: 20),
               child: IconButton(
-                  onPressed: null,
-                  icon: Icon(
+                  onPressed: () {},
+                  icon: const Icon(
                     Icons.delete_rounded,
                     size: 30,
                     color: Color.fromARGB(255, 218, 31, 31),
