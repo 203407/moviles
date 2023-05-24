@@ -32,4 +32,13 @@ class GamesModel extends Game {
         titulo: game.titulo,
         id: game.id);
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'estrellas': estrellas,
+      'descripcion': descripcion,
+      'imagen': imagen,
+      'titulo': titulo,
+      'id': id,
+    };
+  }
 }

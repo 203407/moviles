@@ -1,27 +1,70 @@
-import 'package:actividad1/features/games/presentation/blocs/games_bloc.dart';
+import 'dart:async';
 import 'package:actividad1/features/games/presentation/pages/bt.dart';
 import 'package:actividad1/main.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../usecase_config.dart';
-import '../../domain/usecases/create_games_usecase.dart';
+import '../blocs/games/games_bloc.dart';
 
 class SignF extends StatefulWidget {
   const SignF({super.key});
-
-  // here
 
   @override
   State<SignF> createState() => _SignFState();
 }
 
 class _SignFState extends State<SignF> {
+  late StreamSubscription<ConnectivityResult> subscription;
+
   @override
   void initState() {
     super.initState();
-    context.read<GamesBloc>().add(GetGames());
+    // context.read<GamesBloc>().add(GetGames());
+    interConectivity();
+  }
+
+  void interConectivity() async {
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      context.read<GamesBloc>().add(GetGames());
+      ScaffoldMessenger.of(context).clearSnackBars();
+    } else {
+      const snackBar = SnackBar(
+        content: Text(
+          'Se perdió la conectividad Wi-Fi',
+          style: TextStyle(),
+        ),
+        duration: Duration(days: 365),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.wifi) {
+        context.read<GamesBloc>().add(GetGames());
+        ScaffoldMessenger.of(context).clearSnackBars();
+      } else {
+        context.read<GamesBloc>().add(GamesOffline());
+        const snackBar = SnackBar(
+          content: Text(
+            'Se perdió la conectividad Wi-Fi',
+            style: TextStyle(),
+          ),
+          duration: Duration(days: 365),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -137,6 +180,7 @@ class _SignFState extends State<SignF> {
                 String name = nameController.text;
                 String descrip = descripController.text;
                 String image = imageController.text;
+                // String id = DateTime.now().millisecondsSinceEpoch.toString();
 
                 String resultado = await usecaseConfig.createGameUsecase!
                     .execute(name, descrip, image);
@@ -148,6 +192,12 @@ class _SignFState extends State<SignF> {
                   MaterialPageRoute(builder: (context) => const SignF()),
                   (Route<dynamic> route) => false,
                 );
+                await (Connectivity().checkConnectivity())
+                    .then(((connectivityResult) async {
+                  if (connectivityResult == ConnectivityResult.none) {
+                    BlocProvider.of<GamesBloc>(context).add(GamesOffline());
+                  }
+                }));
               },
               child: const Text('Agregar'),
             ),

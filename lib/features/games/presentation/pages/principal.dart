@@ -1,9 +1,68 @@
+import 'dart:async';
+
+import 'package:actividad1/features/games/presentation/blocs/games/games_bloc.dart';
 import 'package:actividad1/features/games/presentation/pages/signF.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Principal extends StatelessWidget {
+class Principal extends StatefulWidget {
   const Principal({super.key});
+
+  @override
+  State<Principal> createState() => _PrincipalState();
+}
+
+class _PrincipalState extends State<Principal> {
+  late StreamSubscription<ConnectivityResult> subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    interConectivity();
+  }
+
+  void interConectivity() async {
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      context.read<GamesBloc>().add(GetGames());
+      ScaffoldMessenger.of(context).clearSnackBars();
+    } else {
+      const snackBar = SnackBar(
+        content: Text(
+          'Se perdió la conectividad Wi-Fi',
+          style: TextStyle(),
+        ),
+        duration: Duration(days: 365),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      if (result == ConnectivityResult.wifi) {
+        context.read<GamesBloc>().add(GetGames());
+        ScaffoldMessenger.of(context).clearSnackBars();
+      } else {
+        const snackBar = SnackBar(
+          content: Text(
+            'Se perdió la conectividad Wi-Fi',
+            style: TextStyle(),
+          ),
+          duration: Duration(days: 365),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

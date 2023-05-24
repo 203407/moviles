@@ -1,10 +1,10 @@
-import 'package:actividad1/features/games/presentation/blocs/games_bloc.dart';
 import 'package:actividad1/features/games/presentation/pages/principal.dart';
 import 'package:actividad1/usecase_config.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../firebase_options.dart';
+import 'features/games/presentation/blocs/games/games_bloc.dart';
 import 'features/games/presentation/notifications/notification_api.dart';
 
 UsecaseConfig usecaseConfig = UsecaseConfig();
@@ -30,8 +30,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<GamesBloc>(
-            create: (BuildContext context) =>
-                GamesBloc(getGameUsecase: usecaseConfig.getGameUsecase!)),
+            create: (BuildContext context) => GamesBloc(
+                getGameUsecase: usecaseConfig.getGameUsecase!,
+                deleteGameUsecase: usecaseConfig.deleteGameUsecase!,
+                createGameUsecase: usecaseConfig.createGameUsecase!,
+                updateGameUsecase: usecaseConfig.updateGameUsecase!)),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

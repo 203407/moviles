@@ -1,9 +1,11 @@
-import 'package:actividad1/features/games/presentation/blocs/games_bloc.dart';
+import 'package:actividad1/features/games/presentation/blocs/games/games_bloc.dart';
 import 'package:actividad1/features/games/presentation/pages/viewReview.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 import '../../../../main.dart';
 
@@ -37,11 +39,7 @@ class Bt extends StatelessWidget {
                   minimumSize: Size(3, 3),
                 ),
                 onPressed: () {},
-                child: Image(
-                  image: NetworkImage(imagen!),
-                  height: 60,
-                  width: 60,
-                ),
+                child: buildImageWidget(imagen),
               ),
             ),
             Padding(
@@ -98,6 +96,12 @@ class Bt extends StatelessWidget {
                     String resultado =
                         await usecaseConfig.deleteGameUsecase!.execute(id);
                     context.read<GamesBloc>().add(GetGames());
+                    await (Connectivity().checkConnectivity())
+                        .then(((connectivityResult) async {
+                      if (connectivityResult == ConnectivityResult.none) {
+                        BlocProvider.of<GamesBloc>(context).add(GamesOffline());
+                      }
+                    }));
                   },
                   icon: const Icon(
                     Icons.delete_rounded,
@@ -107,5 +111,21 @@ class Bt extends StatelessWidget {
             )
           ])),
     );
+  }
+}
+
+Widget buildImageWidget(String? imagen) {
+  if (imagen != null) {
+    return CachedNetworkImage(
+      imageUrl: imagen,
+      placeholder: (context, url) => const CircularProgressIndicator(),
+      errorWidget: (context, url, error) =>
+          Image.asset('assets/images/backup.png'),
+      height: 60,
+      width: 60,
+    );
+  } else {
+    return const SizedBox
+        .shrink(); // Devuelve un widget vacío si la URL de la imagen es nula
   }
 }
